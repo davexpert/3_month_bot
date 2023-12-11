@@ -1,2 +1,12 @@
 .env
 .idea
+db.sqlite3
+venv
+__pychache__/
+handlers/__pycache__/
+database/__pycache__/
+keyboards/__pychache__/
+__pycache__/config.cpython-39.pyc/
+__pycache__/const.cpython-39.pyc/
+keyboards/__pycache__/__init__.cpython-39.pyc/
+keyboards/__pycache__/inline_buttons.cpython-39.pyc/
