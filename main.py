@@ -2,7 +2,9 @@ from aiogram import executor
 from config import dp
 from handlers import (
     start,
-    questionnaire
+    questionnaire,
+    chat_actions,
+    new_ban_user
 
 )
 from database import sql_commands
@@ -15,6 +17,9 @@ async def on_startup(_):
 
 start.register_start_handlers(dp=dp)
 questionnaire.register_questionnaire_handler(dp=dp)
+chat_actions.register_chat_actions_handlers(dp=dp)
+new_ban_user.register_new_ban_user_handler(dp=dp)
+
 if __name__ == "__main__":
     executor.start_polling(
         dp,

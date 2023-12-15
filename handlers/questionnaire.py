@@ -51,6 +51,12 @@ async def movies_call(call: types.CallbackQuery):
         chat_id=call.from_user.id,
         text="Movies bring stories to life!",
     )
+
+async def my_ban_count(call: types.CallbackQuery):
+    await bot.send_message(
+        chat_id=call.from_user.id,
+        text="Ban count"
+    )
 def register_questionnaire_handler(dp: Dispatcher):
     dp.register_callback_query_handler(start_questionnaire_call,
                                        lambda call: call.data == "start_questionnaire")

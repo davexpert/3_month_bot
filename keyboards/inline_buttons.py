@@ -9,6 +9,16 @@ async def start_menu_keyboard():
     )
     markup.add(questionnaire_button)
     return markup
+async def ban_count_keyboard():
+    markup = InlineKeyboardMarkup()
+    ban_count_button = InlineKeyboardButton(
+        "My ban counter",
+        callback_data="my_ban_count"
+    )
+    markup.add(ban_count_button)
+    return markup
+
+
 
 async def start_questionnaire_keyboard():
     markup = InlineKeyboardMarkup()
