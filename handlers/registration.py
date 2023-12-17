@@ -1,3 +1,6 @@
+import sqlite3
+from sqlite3 import IntegrityError
+
 from aiogram import types, Dispatcher
 from config import bot, MEDIA_DESTINATION
 from aiogram.dispatcher.filters.state import State, StatesGroup
@@ -18,6 +21,14 @@ class RegistrationStates(StatesGroup):
 
 
 async def registration_start(call: types.CallbackQuery):
+    db = Database()
+    tg_id = call.from_user.id
+    if db.is_user_registered(tg_id):
+        await bot.send_message(
+           chat_id=tg_id,
+           text='You are already registered'
+        )
+        return
     await bot.send_message(
         chat_id=call.from_user.id,
         text='Send me ur Nickname, please!!!'
@@ -73,7 +84,7 @@ async def load_age(message: types.Message,
 
     await bot.send_message(
         chat_id=message.from_user.id,
-        text='Send me ur gender'
+        text='What is ur gender'
     )
     await RegistrationStates.next()
 
@@ -196,3 +207,4 @@ def registration_handlers(dp: Dispatcher):
         state=RegistrationStates.photo,
         content_types=types.ContentTypes.PHOTO
     )
+

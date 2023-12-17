@@ -51,3 +51,9 @@ UPDATE ban_users SET BAN_COUNT = BAN_COUNT + 1 WHERE TELEGRAM_ID = ?
 INSERT_PROFILE_QUERY = """
 INSERT INTO profile VALUES (?,?,?,?,?,?,?,?,?)
 """
+SELECT_REGISTERED_PROFILE_QUERY = """
+SELECT * FROM profile WHERE TELEGRAM_ID = ?
+"""
+# UPDATE_REGISTERED_PROFILE_QUERY = """
+# UPDATE profile SET is_registered = 1 WHERE tg_id = ?
+# """

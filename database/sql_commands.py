@@ -55,3 +55,19 @@ class Database:
             (None, tg_id, nickname, bio, age, gender, race, city, photo)
         )
         self.connection.commit()
+
+    def is_user_registered(self, tg_id):
+        self.cursor.execute(
+            sql_queries.SELECT_REGISTERED_PROFILE_QUERY,
+            (tg_id,)
+        ).fetchone()
+        self.connection.commit()
+
+    # def set_user_registered(self, tg_id):
+    #     self.cursor.execute(
+    #         sql_queries.UPDATE_REGISTERED_PROFILE_QUERY,
+    #         (tg_id,)
+    #     )
+    #     self.connection.commit()
+
+
