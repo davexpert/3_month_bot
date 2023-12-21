@@ -7,3 +7,4 @@ handlers/__pycache__/
 database/__pycache__/
 keyboards/__pychache__/
 media
+__pycache__/config.py/
