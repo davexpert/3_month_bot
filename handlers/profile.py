@@ -110,9 +110,10 @@ async def like_detect_call(call: types.CallbackQuery):
 
 async def dislike_detect_call(call: types.CallbackQuery):
     db = Database()
-    owner = re.sub("dislike_", "", call.data)
+    owner = re.sub("dis_", "", call.data)
     print(call.data)
     print(owner)
+    print(dislike_detect_call)
     try:
         db.sql_insert_dislike(
             owner=owner,
@@ -159,5 +160,5 @@ def register_profile_handlers(dp: Dispatcher):
     )
     dp.register_callback_query_handler(
         dislike_detect_call,
-        lambda call: "dislike_" in call.data
+        lambda call: "dis_" in call.data
     )
