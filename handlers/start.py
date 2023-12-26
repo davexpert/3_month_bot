@@ -45,6 +45,9 @@ async def start_button(message: types.Message):
                 chat_id=owner['telegram_id'],
                 text="U have new referral"
             )
+            db.sql_insert_reference_user(
+                reference_user=owner['telegram_id']
+            )
         except sqlite3.IntegrityError:
             pass
 

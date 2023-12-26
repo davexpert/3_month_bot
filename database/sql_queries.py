@@ -72,6 +72,15 @@ UNIQUE (OWNER_TELEGRAM_ID, DISLIKER_TELEGRAM_ID)
 )
 """
 
+CREATE_REFERENCE_USERS_TABLE_QUERY = """
+CREATE TABLE IF NOT EXISTS reference_users
+(
+ID INTEGER PRIMARY KEY,
+REFERENCE_USER INTEGER,
+UNIQUE (REFERENCE_USER)
+)
+"""
+
 INSERT_USER_QUERY = """
 INSERT OR IGNORE INTO telegram_users VALUES (?,?,?,?,?,?,?)
 """
@@ -145,6 +154,16 @@ LEFT JOIN
 WHERE
     telegram_users.TELEGRAM_ID = ?
 """
+SELECT_REFERENCE_USER_QUERY = """
+SELECT
+        COUNT(reference_users.ID) as total_referral
+FROM
+    telegram_users
+LEFT JOIN
+    reference_users ON telegram_users.TELEGRAM_ID = reference_users.REFERENCE_USER
+WHERE
+    telegram_users.TELEGRAM_ID = ?
+"""
 
 SELECT_USER_BY_LINK_QUERY = """
 SELECT * FROM telegram_users WHERE REFERENCE_LINK = ?
@@ -152,6 +171,9 @@ SELECT * FROM telegram_users WHERE REFERENCE_LINK = ?
 
 INSERT_REFERRAL_QUERY = """
 INSERT INTO referral VALUES (?,?,?)
+"""
+INSERT_REFERENCE_USER_QUERY = """
+INSERT INTO referral VALUES (?,?)
 """
 
 UPDATE_USER_BALANCE_QUERY = """

@@ -106,11 +106,25 @@ async def my_profile_keyboard():
     markup.add(manga_button)
     return markup
 
+# async def reference_user_keyboard():
+#     markup = InlineKeyboardMarkup()
+#     reference_button = InlineKeyboardButton(
+#         "Reference Users",
+#         callback_data="reference_user"
+#     )
+#     markup.add(reference_button)
+#     return markup
 async def reference_menu_keyboard():
     markup = InlineKeyboardMarkup()
     link_button = InlineKeyboardButton(
         "Link",
         callback_data="reference_link"
     )
+    reference_button = InlineKeyboardButton(
+        "Reference Users",
+        callback_data="reference_user"
+    )
+    markup.add(reference_button)
     markup.add(link_button)
     return markup
+

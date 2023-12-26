@@ -9,7 +9,8 @@ import random
 import os
 import binascii
 from aiogram.utils.deep_linking import _create_link
-from keyboards.inline_buttons import reference_menu_keyboard
+from keyboards.inline_buttons import reference_menu_keyboard, reference_user_keyboard
+
 
 async def reference_menu_call(call: types.CallbackQuery):
     db = Database()
@@ -25,6 +26,28 @@ async def reference_menu_call(call: types.CallbackQuery):
         ),
         reply_markup=await reference_menu_keyboard()
     )
+
+
+async def reference_user_call(call: types.CallbackQuery):
+    db = Database()
+    data = db.sql_reference_user_data(
+        tg_id=call.from_user.id
+    )
+    if not data:
+        await bot.send_message(
+            chat_id=call.from_user.id,
+            text=REFERENCE_MENU_TEXT.format(
+                user=call.from_user.first_name,
+                referral=data['total_referral']
+            ),
+            reply_markup=await reference_menu_keyboard()
+        )
+    else:
+        await bot.send_message(
+            chat_id=call.from_user.id,
+            text=f"You have no referrals"
+        )
+
 
 async def reference_link_call(call: types.CallbackQuery):
     db = Database()
@@ -56,6 +79,12 @@ def register_reference_handlers(dp: Dispatcher):
         lambda call: call.data == 'reference_menu'
     )
     dp.register_callback_query_handler(
+        reference_user_call,
+        lambda call: call.data == 'reference_user'
+    )
+    dp.register_callback_query_handler(
         reference_link_call,
         lambda call: call.data == 'reference_link'
     )
+
+

@@ -18,6 +18,7 @@ class Database:
         self.connection.execute(sql_queries.CREATE_LIKE_TABLE_QUERY)
         self.connection.execute(sql_queries.CREATE_DISLIKE_TABLE_QUERY)
         self.connection.execute(sql_queries.CREATE_REFERRAL_TABLE_QUERY)
+        self.connection.execute(sql_queries.CREATE_REFERENCE_USERS_TABLE_QUERY)
         try:
             self.connection.execute(sql_queries.ALTER_USER_TABLE)
             self.connection.execute(sql_queries.ALTER_USER_V2_TABLE)
@@ -182,6 +183,15 @@ class Database:
             (tg_id,)
         ).fetchone()
 
+    def sql_reference_user_data(self, tg_id):
+        self.cursor.row_factory = lambda cursor, row: {
+            "total_referral": row[0],
+        }
+        return self.cursor.execute(
+            sql_queries.SELECT_REFERENCE_USER_QUERY,
+            (tg_id,)
+        ).fetchone()
+
     def sql_select_user_by_link(self, link):
         self.cursor.row_factory = lambda cursor, row: {
             "id": row[0],
@@ -201,6 +211,13 @@ class Database:
         self.cursor.execute(
             sql_queries.INSERT_REFERRAL_QUERY,
             (None, owner, referral)
+        )
+        self.connection.commit()
+
+    def sql_insert_reference_user(self, reference_user):
+        self.cursor.execute(
+            sql_queries.INSERT_REFERENCE_USER_QUERY,
+            (None, reference_user,)
         )
         self.connection.commit()
 
