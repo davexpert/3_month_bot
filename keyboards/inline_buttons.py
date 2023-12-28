@@ -23,11 +23,16 @@ async def start_menu_keyboard():
         "Reference Menu 🧲",
         callback_data="reference_menu"
     )
+    news_button = InlineKeyboardButton(
+        "Anime news Parser",
+        callback_data="news"
+    )
     markup.add(questionnaire_button)
     markup.add(registration_button)
     markup.add(profile_button)
     markup.add(view_profile_button)
     markup.add(reference_menu_button)
+    markup.add(news_button)
     return markup
 async def ban_count_keyboard():
     markup = InlineKeyboardMarkup()

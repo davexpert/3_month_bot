@@ -8,6 +8,7 @@ from handlers import (
     registration,
     profile,
     reference,
+    news_handler
 
 )
 from database import sql_commands
@@ -24,6 +25,7 @@ new_ban_user.register_new_ban_user_handler(dp=dp)
 registration.registration_handlers(dp=dp)
 profile.register_profile_handlers(dp=dp)
 reference.register_reference_handlers(dp=dp)
+news_handler.register_news_handlers(dp=dp)
 chat_actions.register_chat_actions_handlers(dp=dp)
 
 

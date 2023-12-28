@@ -9,7 +9,7 @@ import random
 import os
 import binascii
 from aiogram.utils.deep_linking import _create_link
-from keyboards.inline_buttons import reference_menu_keyboard, reference_user_keyboard
+from keyboards.inline_buttons import reference_menu_keyboard
 
 
 async def reference_menu_call(call: types.CallbackQuery):
