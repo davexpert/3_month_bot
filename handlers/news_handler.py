@@ -4,7 +4,7 @@ from scraper.news_scraper import NewsScraper
 async def scrape_news(call: types.CallbackQuery):
     scraper = NewsScraper()
     data = scraper.parse_data()
-    for url in data:
+    for url in data[:3]:
         await call.message.answer(
             f"{NewsScraper.PLUS_URL}{url}",
         )
